@@ -1,0 +1,375 @@
+---
+title: "Analiza statystyk Micheal'a Jordan'a w sezonie 1997-98"
+author: "Kamil Chmielak"
+format: 
+  html: 
+    self-contained: true
+    echo: false
+    message: false 
+    warning: false 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+##Wczytanie bibliotek
+
+library(tidyverse)
+library(rvest)
+library(tidyr)
+
+library(knitr)
+library(kableExtra)
+
+library(ggplot2)
+library(ggthemes)
+library(repr)
+```
+
+```{r}
+##Url
+
+url <- "https://www.landofbasketball.com/nba_players_game_logs/1998/michael_jordan_full.htm"
+
+url2 <- "https://www.basketball-reference.com/players/j/jordami01/gamelog/1998#pgl_basic"
+```
+
+```{r}
+##Wczytywanie danych z sezonu regularnego
+
+page <- read_html(url2)
+
+PTS <- page %>% 
+  html_nodes(".right:nth-child(28)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+##Minuty z bb-references z sekundami
+MIN <- page %>% 
+  html_nodes(".right:nth-child(10)") %>% 
+  html_text()
+```
+
+```{r}
+##Minuty pełne z landofabsketball
+strona <- read_html(url)
+
+MIN <- strona %>% 
+  html_nodes(".a-top td:nth-child(5)") %>%    html_text()
+
+MIN <- as.integer(MIN[2:83])
+```
+
+```{r}
+FG<- page %>% 
+  html_nodes(".right:nth-child(11)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FGA<- page %>% 
+  html_nodes(".right:nth-child(12)") %>% 
+  html_text() %>% 
+  as.integer()
+
+```
+
+```{r}
+TP <- page %>% 
+  html_nodes(".right:nth-child(14)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+TPA <- page %>% 
+  html_nodes(".right:nth-child(15)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FT <- page %>% 
+  html_nodes(".right:nth-child(17)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FTA <- page %>% 
+  html_nodes(".right:nth-child(18)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+REB <- page %>% 
+  html_nodes(".right:nth-child(22)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+AST <- page %>% 
+  html_nodes(".right:nth-child(23)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+STL <- page %>% 
+  html_nodes(".right:nth-child(24)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+BLK <- page %>% 
+  html_nodes(".right:nth-child(24)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+TO <- page %>% 
+  html_nodes(".right:nth-child(25)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+PF <- page %>% 
+  html_nodes(".right:nth-child(26)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+PM <- page %>% 
+  html_nodes("td:nth-child(30)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+"Date" <- page %>% 
+  html_nodes(".tooltip+ .left a") %>% 
+  html_text()
+```
+
+```{r}
+"Team" <- page %>% 
+  html_nodes(".center+ .left a") %>% 
+  html_text()
+```
+
+```{r}
+bilans <- page %>% 
+  html_nodes(".center~ td.center") %>% 
+  html_text()
+
+WL <- substr(bilans,1,1)
+```
+
+```{r}
+RS <- data.frame(Date, Team, WL, MIN, PTS, FG, FGA, TP, TPA, FT, FTA, REB, AST, STL, BLK, TO, PF, PM)
+
+```
+
+## Micheal 'Air' Jordan
+
+**Michael Jeffrey Jordan** urodził się w Nowym Jorku, na Brooklynie, 17 lutego 1963 r. Był jednym z pięciorga dzieci Jamesa i Deloris Jordan. W szkole podstawowej interesował się głównie baseballem i piłką nożną. Z czasem, za sprawą starszego brata zaczął również grać w koszykówkę.
+
+![](pictures/wings1.jpg){fig-alt="MIcheal Jordan - wings" fig-align="center"}
+
+Kariera Jordana w NBA rozpoczęła się w 1984 r. Szybko stał się gwiazdą ligi. Grał w **Chicago Bulls** jako zawodnik z numerem **23** na pozycji rzucającego obrońcy. Przez wiele lat odnosił sukcesy, przypisuje mu się wiele rekordów, niektóre nie zostały do dziś pobite. Został zaliczony do grona 50 najlepszych zawodników w historii NBA, a przez wiele osób uważany jest za najlepszego - **The Greatest of All Time (G.O.A.T)**.
+
+'MJ' brał udział 14-krotnie w NBA All-Star Game, zdobył 5 statuetek MVP, był 2 razy mistrzem olimpijskim , a także 6 razy wygrał mistrzostwo NBA. Ostatni sezon Jordana w trykocie Chicago Bulls był wyjątkowy - odbywał się w cieniu napięć z kierownictwem klubu i przemożnego poczucia, że to naprawdę ostatnia okazja, aby zobaczyć w pełnej krasie największego koszykarza wszechczasów. Ówczesny trener Phil Jackson nazwał ten sezon **"The Last Dance" - "Ostatni Taniec"**. Korzystając z informacji ze strony `www.basketball-reference.com` przeanalizuje statystyki Micheal'a Jordan'a w sezonie 1997-98.
+
+[![](pictures/the-last-dance.webp){fig-alt="The Last Dance" fig-align="center"}](https://www.netflix.com/pl/title/80203144)
+
+# Sezon regularny (Regular season)
+
+```{r}
+#| label: tbl-RS
+#| tbl-cap: Pierwsze 10 wierszy tabeli statystyk z Sezonu Regularnego
+head(RS,n=10) %>% 
+  kbl()%>% 
+  kable_styling(bootstrap_options = "condensed")
+```
+
+## Czas
+
+Micheal Jordan oraz Chicago bulls w sezonie 1997-98 podczas każdego z 82 meczów przyciągali miliony widzów do hali, jak i przed telewizory. Średnia ilość minut spędzonych na parkiecie przez MJ wynosi **38.88**, natomiast w sumie mogliśmy go podziwiać przez **3188** minut.
+
+```{r}
+#| label: tbl-MinSummary
+#| tbl-cap: Podsumowanie minut spędzonych na boisku
+RS %>% 
+  summarise("Minimalny czas"=min(MIN),
+            "Średni czas"=round(mean(MIN), digits=2),
+            "Maksymalny czas"=max(MIN),
+            "Suma"=sum(MIN)) %>% 
+  kable()
+```
+
+Największa ilość minut spędzonych na parkiecie wynosi aż **50**, odbyło się to 21 listopada 1997 roku - potrzebna była do tego dogrywka. Natomiast najmniejszy dorobek to **24** minuty. Oba te mecze skończyły się zwycięstwem.
+
+```{r}
+RS %>% 
+  arrange(-MIN) %>% 
+  filter(row_number()==1 | row_number()== n()) %>% 
+  select(c(1,2,3,4)) %>% 
+  kbl()
+```
+
+```{r}
+options(repr.plot.width = 6, repr.plot.height =3)
+```
+
+Poniżej znajduje się wykres liniowy przedstawiający ilośc minut w rozegranych meczach na przestrzeni całego sezonu
+
+```{r}
+RS %>% 
+   ggplot(aes(x=Date,y=MIN,group=1))+
+    geom_line(size=1)+
+    geom_point(shape=21, size=4,aes(fill=after_stat(y>38.88)))+
+    geom_hline(yintercept=mean(MIN),col='red',alpha=0.6,size=1.25, linetype='dashed')+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y="Minuty",
+       x="Data meczu",
+       fill="Ilość minut ponad średnią")+
+    scale_fill_manual(
+    values = c("red", "black")
+  )+
+  theme(legend.position = "top")
+  
+```
+
+## Punkty
+
+Jordan znany był ze swojej umiejętności zdobywania punktów. Jego średnia ilość zdobywanych punktów w sezonie 97-98 wynosiła **28.74**, a suma **2357.**
+
+```{r}
+#| label: tbl-PtsSummary
+#| tbl-cap: Podsumowanie rzuconych punktów
+RS %>% 
+  summarise("Min"=min(PTS),
+            "Średnia"=round(mean(PTS), digits=2),
+            "Max"=max(PTS),
+            "Suma"=sum(PTS)) %>% 
+  kable()
+```
+
+Chciacago Bulls zmierzyło się z 28 drużynami - najmniejsza ilość meczy przeciwko drużynie wynosiła **2**, a największa **4**.
+
+```{r}
+##Jak wypadł przeciwko każdej drużynie
+Teams<- RS %>% 
+  group_by(Team) %>% 
+  summarise(Max=max(PTS),
+            "Średnia"=mean(PTS),
+            "Ilość meczy"=n())
+```
+
+```{r}
+#| label: tbl-MeczeSummary
+#| tbl-cap: Ilość rozegranych meczy 
+Teams %>% 
+  group_by(`Ilość meczy`) %>% 
+  summarise("Ilość Drużyn"= n()) %>% 
+  kbl()
+```
+
+```{r}
+#| label: fig-MaxTeams
+#| fig-cap: Maksymalna ilość punktów zdobytych przeciw poszczególnym drużynom
+
+Teams %>% 
+  arrange(-Max)%>%
+  ggplot(aes(x=reorder(Team, -Max),y=Max, fill=Team,color=Team))+
+  geom_col(size=1.1)+
+  scale_fill_manual(values = c("#C8102E","#007A33","#1d1160","#860038","#00538C","#0E2240","#C8102E","#1D428A","#CE1141","#002D62","#c8102E","#552583","#98002E","#00471B","#0C2340","#002A60","#006BB6","#0077c0","#006bb6","#FF6900","#E03A3E","#5a2d81","#c4ced4","#00653a","#753BBD","#002B5C","#00B2A9","#002B5C"))+
+  scale_color_manual(values = c("#FDB927","#BA9653","#00788C","#FDBB30","#002B5e","#FEC524","#1d42ba","#ffc72c","#000000","#FDBB30","#1d428a","#FDB927","#F9A01B","#EEE1C6","#78BE20","#777D84","#F58426","#C4ced4","#ed174c","#5F259F","#000000","#63727A","#000000","#ffc200","#BA0C2F","#00471B","#BC7844","#e31837"))+
+  labs(y="Maksymalna ilość punktów",
+       x="Zespół",
+       fill="Zespół",
+       color="Zespół")
+
+```
+
+```{r}
+#| label: fig-MeanTeams
+#| fig-cap: Średnia ilość punktów zdobytych przeciw poszczególnym drużynom
+
+Teamdf<- data.frame(
+  x = Teams$Team,
+  y = Teams$Średnia,
+  g = Teams$`Ilość meczy`
+)
+
+Teamdf %>% 
+  ggplot(aes(reorder(x,-g), y, fill=factor(g))) +
+  geom_col(position = "dodge", colour = "black")+
+  labs(y="Średnia ilość punktów",
+       x="Zespół",
+       fill="Ilość meczy rozegranych z poszczególną drużyną")+
+  scale_fill_manual(values=c("#CE1141","#FFFFFF","#000000"))+
+  theme(legend.position = "top")
+```
+
+```{r}
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+
+RS %>% 
+   ggplot(aes(x=MIN,y=PTS,group=1))+
+    geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+  geom_smooth(se=FALSE, method="lm", color=alpha("black",0.5), size=1.5)+
+  labs(y="Minuty na boisku",
+       x="Ilość zdobytych punktów",
+       fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+    scale_fill_manual(
+    values = c("#CE1141", "#FFFFFF")
+  )+
+  theme(legend.position = "top")
+
+```
+
+```{r}
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutów oddanych a rzutów trafionych
+RS %>% 
+  mutate("FGTotal"=cumsum(FG),
+         "FGATotal"=cumsum(FGA)) %>% 
+    ggplot()+ 
+    geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+    geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y="",
+       x="Data meczu",
+       color="")+
+  theme(legend.position = "top")+
+  scale_color_manual(values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))
+```
+
+```{r}
+##co tu zrobić?? ike meczy wiecej niz 25 pkt? pie chart?
+RS %>% 
+  filter(PTS>25) %>% 
+  summarise("40 PTS"=n())
+```
+
+```{r}
+RS %>% 
+  mutate("Skuteczność"=round(FG/FGA,digits = 2)) %>% 
+  filter(`Skuteczność`>=0.6)
+```
+
+```{r}
+label_percent()(0.24)
+```

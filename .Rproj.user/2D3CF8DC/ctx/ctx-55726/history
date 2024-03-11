@@ -1,0 +1,512 @@
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black")+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha=0.7)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha="0.7")+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha=0.5,)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha=0.5, size=1.25)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha=0.5, size=1.5)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color="black",alpha=0.2, size=1.5)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color=alpha("black",0.5),alpha=0.2, size=1.5)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+RS %>%
+ggplot(aes(x=MIN,y=PTS,group=1))+
+geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+geom_smooth(se=FALSE, method="lm", color=alpha("black",0.5), size=1.5)+
+labs(y="Minuty na boisku",
+x="Ilość zdobytych punktów",
+fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+scale_fill_manual(
+values = c("#CE1141", "#FFFFFF")
+)+
+theme(legend.position = "top")
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTime"=rowSums(FG))
+View(RS)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTime"=rowSums(FGA))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTime"=apply(FGA))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate(FGTotal=rowSums(FGA))
+View(RS)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate(FGTotal=rowwise(FGA))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate(FGTotal=rowsum(FGA))
+View(RS)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate(FGTotal=rowSums(select(6))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate(FGTotal=rowSums(select(6)) %>%
+head(n=3)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTotal"=rowSums(select(6)) %>%
+head(n=3)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTotal"=rowSums(select(6))) %>%
+head(n=3)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTotal"=rowSums(select(.,6))) %>%
+head(n=3)
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+iris %>%
+mutate(sumVar = rowSums(select(., contains("Sepal")))) %>%
+head
+i = 0
+while (i ‹ 83)
+i = 0
+while (i ‹ 83)
+i = 0
+while (i‹83)
+i = 0
+while (i‹83)
+i <-  0
+while (i‹83)
+RS %>%
+group_by(Date) %>%
+summarise(Suma=sum(FG))
+RS %>%
+group_by(Date) %>%
+summarise(Suma=cumsum(FG))
+RS %>%
+summarise(Suma=cumsum(FG))
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA))
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot(aes(x=date))+
+geom_line(aes(y = FGTotal), color = "darkred") +
+geom_line(aes(y = FGATotal), color="steelblue", linetype="twodash")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot(aes(x=Date))+
+geom_line(aes(y = FGTotal), color = "darkred") +
+geom_line(aes(y = FGATotal), color="steelblue", linetype="twodash")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot(aes(x=Date))+
+geom_line(aes(y = FGTotal), color = "darkred")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal),color='red')
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal),color='red')+
+geom_line(aes(x=Date,y=FGATotal),color='blue')
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal),color='blue')
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='blue')
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='blue')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="Minuty",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+scale_fill_manual(
+values = c("red", "black")
+)+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='blue')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="Minuty",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='blue')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='black')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='red')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1),color='red')+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='black')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1),color='black')+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='black'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+fill="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='black'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='black'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(name = "Y series", values = c("FGTotal" = "darkblue", "FGATotal" = "red"))
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='black'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(name = "Ilość rzutóW oddanych a rzutóW trafionych", values = c("FGTotal" = "darkblue", "FGATotal" = "red"))
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='red'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(name = "Ilość rzutów oddanych a rzutów trafionych", values = c("Rzuty wykonane" = "darkblue", "Rzuty trafione" = "red"))
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(name = "Ilość rzutów oddanych a rzutów trafionych", values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutóW oddanych a rzutóW trafionych
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(name = "Ilość rzutów oddanych a rzutów trafionych", values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))+
+geom_point()
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutów oddanych a rzutów trafionych
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="Ilość minut ponad średnią")+
+theme(legend.position = "top")+
+scale_color_manual(values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutów oddanych a rzutów trafionych
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu")+
+theme(legend.position = "top")+
+scale_color_manual(values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutów oddanych a rzutów trafionych
+RS %>%
+mutate("FGTotal"=cumsum(FG),
+"FGATotal"=cumsum(FGA)) %>%
+ggplot()+
+geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+labs(y="",
+x="Data meczu",
+color="")+
+theme(legend.position = "top")+
+scale_color_manual(values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))
+RS %>%
+summary("40 PTS"=n())
+RS %>%
+summary("40 PTS"=n(PTS>40))
+RS %>%
+summary("40 PTS"=count(PTS>40))
+RS %>%
+summary("40 PTS"=count(PTS>40))
+RS %>%
+summary("40 PTS"=count(PTS>40)) %>%
+head(n=2)
+RS %>%
+summarise("40 PTS"=count(PTS>40)) %>%
+head(n=2)
+RS %>%
+summarise("40 PTS"=n(PTS>40))
+RS %>%
+filter(PTS>40)
+summarise("40 PTS"=n())
+RS %>%
+filter(PTS>40) %>%
+summarise("40 PTS"=n())
+RS %>%
+filter(PTS>40) %>%
+mutate("40 PTS"=n())
+RS %>%
+filter(PTS>40) %>%
+summarise("40 PTS"=n())
+View(RS)
+RS %>%
+filter(PTS>20) %>%
+summarise("40 PTS"=n())
+RS %>%
+filter(PTS>20) %>%
+summarise("40 PTS"=n()
+"elo"=(82-n()))
+RS %>%
+filter(PTS>20,PTS<30) %>%
+summarise("40 PTS"=n())
+RS %>%
+filter(PTS>20,PTS<35) %>%
+summarise("40 PTS"=n())
+RS %>%
+filter(PTS>20) %>%
+summarise("40 PTS"=n())
+##co tu zrobić?? ike meczy wiecej niz 20 pkt? pie chart?
+RS %>%
+filter(PTS>25) %>%
+summarise("40 PTS"=n())
+##co tu zrobić?? ike meczy wiecej niz 20 pkt? pie chart?
+RS %>%
+filter(PTS>30) %>%
+summarise("40 PTS"=n())
+##co tu zrobić?? ike meczy wiecej niz 20 pkt? pie chart?
+RS %>%
+filter(PTS>25) %>%
+summarise("40 PTS"=n())
+##co tu zrobić?? ike meczy wiecej niz 25 pkt? pie chart?
+RS %>%
+filter(PTS>25) %>%
+summarise("40 PTS"=n())
+RS %>%
+mutate("Skuteczność"=round(FG/FGA,digits = 2))
+RS %>%
+mutate("Skuteczność"=round(FG/FGA,digits = 2)) %>%
+filter(`Skuteczność`>0.6)
+RS %>%
+mutate("Skuteczność"=round(FG/FGA,digits = 2)) %>%
+filter(`Skuteczność`>=0.6)
+percent(0.24)
+label_percent(0.24)
+percent_rank(0.24)
+percent_rank()(0.24)
+label_percent()(0.24)

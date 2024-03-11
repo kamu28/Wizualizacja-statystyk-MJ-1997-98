@@ -1,0 +1,130 @@
+{
+    "entries": [
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "PtsSummary",
+            "suffix": "",
+            "title": "Podsumowanie rzuconych punktów"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "PercentFT",
+            "suffix": "",
+            "title": "Skuteczność rzutów osobistych"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "Total",
+            "suffix": "",
+            "title": "Podsumowanie statystyk \"dodatnich"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "Morethan25",
+            "suffix": "",
+            "title": "Ilość meczy, podczas których MJ zdobył więcej niż 25 punktów"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "MeczeSummary",
+            "suffix": "",
+            "title": "Ilość rozegranych meczy "
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "MeanMaxTeams",
+            "suffix": "",
+            "title": "Największa średnia ilość punktów przeciw poszczególnym drużynom"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "ASTtoTO",
+            "suffix": "",
+            "title": "Suma meczy z porównaniem ilości asyst i strat"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "StealsandBlocks",
+            "suffix": "",
+            "title": "Ilość rzutów oddanych a rzutów trafionych"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "TypeofPTS",
+            "suffix": "",
+            "title": "Suma punktów zdobytych z rzutów osobistych, półdystansu i zza linii 7.24"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "MaxTeams",
+            "suffix": "",
+            "title": "Maksymalna ilość punktów zdobytych przeciw poszczególnym drużynom"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "FGtoFGA",
+            "suffix": "",
+            "title": "Ilość rzutów oddanych a rzutów trafionych"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "Doubledouble",
+            "suffix": "",
+            "title": "Mecze podczas, których MJ miał \"double-double"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "MinSummary",
+            "suffix": "",
+            "title": "Podsumowanie minut spędzonych na boisku"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "MinToPoints",
+            "suffix": "",
+            "title": "Ilość minut a ilośc zdobytych punktów"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "fig",
+            "id": "MintoDate",
+            "suffix": "",
+            "title": "ilośc minut spędzonych na parkiecie podczas rozegranych meczy na przestrzeni całego sezonu"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "RS",
+            "suffix": "",
+            "title": "Pierwsze 10 wierszy tabeli statystyk z Sezonu Regularnego"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "MinMaxMinutes",
+            "suffix": "",
+            "title": "Mecze z największą i najmniejszą ilością rozegranych minut"
+        },
+        {
+            "file": "Analiza statystyk MJ w sezonie 1997-98.qmd",
+            "type": "tbl",
+            "id": "effectivenessover60",
+            "suffix": "",
+            "title": "Mecze, w których \"MJ\" rzucał ze skutecznością większa niż 60%"
+        }
+    ]
+}

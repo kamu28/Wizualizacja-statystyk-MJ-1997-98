@@ -1,0 +1,87 @@
+---
+title: "Wykresy - 2"
+author: "Kamil"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(ggplot2)
+library(plotly)
+library(scales)
+library(tidyverse)
+```
+
+```{r}
+p <-  iris %>% 
+  ggplot(aes(x=Sepal.Length,y=Sepal.Width, color = Species))+
+  geom_point()+
+  geom_smooth(method = lm, se = F, fullrange = T)+
+  labs( x = "Długość kielicha", y = "Szerokość kielicha", color = " Gatunek")
+```
+
+```{r}
+iris %>% 
+  plot_ly(x = ~Sepal.Length, y = ~Sepal.Width, color = ~Species)
+```
+
+Każdy wykres z ggplot możesz przerobić na plotly!
+
+```{r}
+ggplotly(p)
+```
+
+Sposoby na poradzenie sobie z dużą gęstością wykresu
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x=carat,y=price))+
+  geom_point(alpha=0.01)
+```
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x=carat, y = price))+
+  geom_hex()
+```
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x=carat, y = price))+
+  geom_bin2d(bins=10)
+```
+
+```{r}
+starwars %>%
+  drop_na() %>% 
+  ggplot(aes(gender))+
+  geom_bar()+
+  geom_text(stat="count",aes(label = ..))
+```
+
+```{r}
+starwars %>% 
+  count(species) %>% 
+  drop_na() %>% 
+  ggplot(aes(species,y=n))+
+  geom_bar(stat = "identity")+
+  coord_flip()
+```
+
+Potrzebna biblioteka palr - różne palety kolorów
+
+```{r}
+starwars %>% 
+  count(species) %>% 
+  drop_na() %>% 
+  ggplot(aes(fct_reorder(species,-n),y=n))+
+  geom_bar(stat = "identity")+
+  theme(axis.text.x = element_text(angle = 90) )+
+  scale_fill_manual(values = ice_pal(nrow(dt)))
+```
+
+```{r}
+library(quantmod)
+```

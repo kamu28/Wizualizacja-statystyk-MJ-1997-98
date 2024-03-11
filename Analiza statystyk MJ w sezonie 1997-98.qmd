@@ -1,0 +1,752 @@
+---
+title: "Analiza statystyk Michael'a Jordan'a w sezonie 1997-98"
+author: "Kamil Chmielak"
+format: 
+  html: 
+    self-contained: true
+    echo: false
+    message: false 
+    warning: false 
+editor: visual
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+##Wczytanie bibliotek
+
+library(tidyverse)
+library(rvest)
+library(tidyr)
+
+library(knitr)
+library(kableExtra)
+library(formattable)
+
+library(gtsummary)
+
+library(ggplot2)
+library(cowplot)
+library(ggthemes)
+library(repr)
+
+library(scales)
+```
+
+```{r}
+##Url
+
+url <- "https://www.landofbasketball.com/nba_players_game_logs/1998/michael_jordan_full.htm"
+
+url2 <- "https://www.basketball-reference.com/players/j/jordami01/gamelog/1998#pgl_basic"
+
+url3 <- "https://www.landofbasketball.com/year_by_year_stats/1997_1998_leaders_steals_tot_rs.htm"
+```
+
+```{r}
+##Wczytywanie danych z sezonu regularnego
+
+page <- read_html(url2)
+
+PTS <- page %>% 
+  html_nodes(".right:nth-child(28)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+##Minuty z bb-references z sekundami
+MIN <- page %>% 
+  html_nodes(".right:nth-child(10)") %>% 
+  html_text()
+```
+
+```{r}
+##Minuty pełne z landofabsketball
+strona <- read_html(url)
+
+MIN <- strona %>% 
+  html_nodes(".a-top td:nth-child(5)") %>%    html_text()
+
+MIN <- as.integer(MIN[2:83])
+```
+
+```{r}
+FG<- page %>% 
+  html_nodes(".right:nth-child(11)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FGA<- page %>% 
+  html_nodes(".right:nth-child(12)") %>% 
+  html_text() %>% 
+  as.integer()
+
+```
+
+```{r}
+TP <- page %>% 
+  html_nodes(".right:nth-child(14)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+TPA <- page %>% 
+  html_nodes(".right:nth-child(15)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FT <- page %>% 
+  html_nodes(".right:nth-child(17)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+FTA <- page %>% 
+  html_nodes(".right:nth-child(18)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+REB <- page %>% 
+  html_nodes(".right:nth-child(22)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+AST <- page %>% 
+  html_nodes(".right:nth-child(23)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+STL <- page %>% 
+  html_nodes(".right:nth-child(24)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+BLK <- page %>% 
+  html_nodes(".right:nth-child(25)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+TO <- page %>% 
+  html_nodes(".right:nth-child(26)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+PF <- page %>% 
+  html_nodes(".right:nth-child(27)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+PM <- page %>% 
+  html_nodes("td:nth-child(30)") %>% 
+  html_text() %>% 
+  as.integer()
+```
+
+```{r}
+"Date" <- page %>% 
+  html_nodes(".tooltip+ .left a") %>% 
+  html_text()
+```
+
+```{r}
+"Team" <- page %>% 
+  html_nodes(".center+ .left a") %>% 
+  html_text()
+```
+
+```{r}
+bilans <- page %>% 
+  html_nodes(".center~ td.center") %>% 
+  html_text()
+
+WL <- substr(bilans,1,1)
+```
+
+```{r}
+RS <- data.frame(Date, Team, WL, MIN, PTS, FG, FGA, TP, TPA, FT, FTA, REB, AST, STL, BLK, TO, PF, PM)
+
+```
+
+```{r}
+##Zawodnicy - steals
+strona2 <- read_html(url3)
+
+Zawodnicy <- strona %>% 
+  html_nodes(".a-top .left:nth-child(1)") %>%
+  html_text() %>% 
+  parse_integer()
+```
+
+## Michael 'Air' Jordan
+
+**Michael Jeffrey Jordan** urodził się w Nowym Jorku, na Brooklynie, 17 lutego 1963 r. Był jednym z pięciorga dzieci Jamesa i Deloris Jordan. W szkole podstawowej interesował się głównie baseballem i piłką nożną. Z czasem, za sprawą starszego brata zaczął również grać w koszykówkę.
+
+![](pictures/wings1.jpg){fig-alt="MIcheal Jordan - wings" fig-align="center"}
+
+Kariera Jordana w NBA rozpoczęła się w 1984 r. Szybko stał się gwiazdą ligi. Grał w **Chicago Bulls** jako zawodnik z numerem **23** na pozycji rzucającego obrońcy. Przez wiele lat odnosił sukcesy, przypisuje mu się wiele rekordów, niektóre nie zostały do dziś pobite. Został zaliczony do grona 50 najlepszych zawodników w historii NBA, a przez wiele osób uważany jest za najlepszego - **The Greatest of All Time (G.O.A.T)**.
+
+Więcej informacji na temat życiorysu Michael'a Jordana - @MJ.
+
+'MJ' brał udział 14-krotnie w NBA All-Star Game, zdobył 5 statuetek MVP, był 2 razy mistrzem olimpijskim , a także 6 razy wygrał mistrzostwo NBA. Ostatni sezon Jordana w trykocie Chicago Bulls był wyjątkowy - odbywał się w cieniu napięć z kierownictwem klubu i przemożnego poczucia, że to naprawdę ostatnia okazja, aby zobaczyć w pełnej krasie największego koszykarza wszechczasów. Ówczesny trener Phil Jackson nazwał ten sezon **"The Last Dance" - "Ostatni Taniec"**. Korzystając z informacji ze stron `www.basketball-reference.com` oraz `www.landofbasketball.com` przeanalizuje statystyki Michael'a Jordan'a w sezonie 1997-98.
+
+[![](pictures/the-last-dance.webp){fig-alt="The Last Dance" fig-align="center"}](https://www.netflix.com/pl/title/80203144)
+
+# Sezon regularny (Regular season)
+
+**Sezon 1997-98 był już 52 sezonem NBA**, a brały w nim udział 29 drużyny, które łącznie rozegrały **82 spotkania**. Sezon rozpoczął się 31 października 1997, a zakończył 19 kwietnia 1998 roku. @97/98
+
+```{r}
+#| label: tbl-RS
+#| tbl-cap: Pierwsze 10 wierszy tabeli statystyk z Sezonu Regularnego
+#| 
+head(RS,n=10) %>%
+  kbl(align="c",escape = F) %>%
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = T, position = "center") %>%
+  column_spec(2, image =spec_image(c("BOS.png","76ers.png","SAS.png","ORL.png","ATL.png","NJN.png","CLE.png","WAS.png","CHH.png","CLE.png"),70,70)) %>% 
+  column_spec(3, 
+              color =ifelse(WL=="W","#01fd21","red"),bold=T) %>% 
+  scroll_box(height = "500px")
+  
+```
+
+Tabela przedstawia każdy mecz rozegrany przez Jordana w sezonie regularnym 1997-98, a także jego statystyki. Poniżej znajduje się opis nagłówków:
+
+-   **Date** - Data rozegrania meczu w formacie rok, miesiąc i dzień (YYYY-MM-DD)
+-   **Team** - Drużyna z którą grało Chicago Bulls danego dnia
+-   **WL** - Rezultat meczu
+    -   **W** - Wygrana (ang. *Win*)
+    -   **L** - Przegrana (ang. *Loss*)
+-   **MIN** - Ilość minut spędzonych na boisku
+-   **PTS** - Ilość punktów zdobytych
+-   **FG** - Trafione rzuty podaczas meczu (ang. *Field goal*)
+-   **FGA** - Oddane rzuty podczas meczu (ang. *Field goal attempts*)
+-   **TP** - Trafione rzuty 3-puntkowe (ang. *Three pointer*)
+-   **TPA** - Oddane rzuty 3-punktowe (ang. *Three pointer attempts*)
+-   **FT** - Trafione rzuty osobiste (ang. *Free throw*)
+-   **FTA** - Oddane rzuty osobiste (ang. *Free throw attempts*)
+-   **REB** - Zbiórki (ang. *Rebounds*)
+-   **AST** - Asysty (ang. *Assists)*
+-   **STL** - Przechwyty (ang. *Steals*)
+-   **BLK** - Bloki (ang. *Blocks*)
+-   **TO** - Straty piłki (ang. *Turnovers*)
+-   **PM** - Plus/Minus - Statystyka ta odzwierciedla jak drużyna się sprawowała, gdy gracz był na boisku @whatdoe
+
+## Czas
+
+MIchael Jordan oraz Chicago bulls w sezonie 1997-98 podczas każdego z 82 meczów przyciągali miliony widzów do hali, jak i przed telewizory. Średnia ilość minut spędzonych na parkiecie przez "Jego Powietrzność" wynosi **38.88**, natomiast w sumie mogliśmy go podziwiać przez **3188** minut.
+
+```{r}
+#| label: tbl-MinSummary
+#| tbl-cap: Podsumowanie minut spędzonych na boisku
+RS %>% 
+  summarise("Minimalny czas"=min(MIN),
+            "Średni czas"=round(mean(MIN), digits=2),
+            "Suma"=sum(MIN),
+            "Maksymalny czas"=max(MIN)) %>% 
+   kbl(align = "c") %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = F, position = "center")
+```
+
+Największa ilość minut spędzonych na parkiecie wynosi aż **50**, odbyło się to 21 listopada 1997 roku - potrzebna była do tego dogrywka. Natomiast najmniejszy dorobek to **24** minuty. Oba te mecze skończyły się zwycięstwem.
+
+```{r}
+#| label: tbl-MinMaxMinutes
+#| tbl-cap: Mecze z największą i najmniejszą ilością rozegranych minut
+RS %>% 
+  arrange(-MIN) %>% 
+  filter(row_number()==1 | row_number()== n()) %>% 
+  select(c(1,2,3,4)) %>%
+    mutate(MIN=color_bar("red")(MIN)) %>% 
+  rename(" Data "="Date",
+               " Dryżyna "="Team",
+               " Rezultat meczu "="WL",
+          "Minuty"="MIN") %>%
+  kbl(align = "c",escape=F) %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = F, position = "center") %>% 
+  column_spec(2, image =spec_image(c("LAC.png","76ers.png"),70,70))%>% 
+  column_spec(3, 
+              color ="#01fd21",bold=T) %>% 
+  column_spec(4, 
+              color ="white",bold=T)
+```
+
+Poniżej (Patrz [Fig. - @fig-MintoDate]) znajduje się wykres liniowy przedstawiający ilośc minut spędzonych na parkiecie podczas rozegranych meczy na przestrzeni całego sezonu.
+
+```{r,fig.width=16,fig.height=7}
+#| label: fig-MintoDate
+#| fig-cap: ilośc minut spędzonych na parkiecie podczas rozegranych meczy na przestrzeni całego sezonu
+
+RS %>% 
+   ggplot(aes(x=Date,y=MIN,group=1))+
+    geom_line(size=1)+
+    geom_point(shape=21, size=4,aes(fill=after_stat(WL=="W")))+
+    geom_hline(yintercept=mean(MIN),col='red',alpha=0.6,size=1.25, linetype='dashed')+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size = 13))+
+  labs(y="Minuty",
+       x="Data meczu",
+       fill="Rezultat meczu")+
+    scale_fill_manual(
+    values = c("red", "#01fd21"),
+    labels=c("Przegrana","Wygrana")
+  )+
+  theme(legend.position = "top")+
+  theme(legend.title = element_text(size = 20),
+        legend.text = element_text(size = 20),
+        axis.title = element_text(size = 20))
+  
+```
+
+## Punkty
+
+Jordan znany był ze swojej umiejętności zdobywania punktów. Jego średnia ilość zdobywanych punktów w sezonie 97-98 wynosiła **28.74**, natomiast suma **2357.**
+
+```{r}
+#| label: tbl-PtsSummary
+#| tbl-cap: Podsumowanie rzuconych punktów
+RS %>% 
+  summarise("Min"=min(PTS),
+            "Średnia"=round(mean(PTS), digits=2),
+            "Suma"=sum(PTS),
+            "Max"=max(PTS)) %>% 
+   kbl(align = "c") %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = F, position = "center")
+```
+
+Podczas każdego z 82 meczy MIchael zdobywał dwucyfrową liczbę "oczek" (Patrz [Tbl. - @tbl-PtsSummary]). Natomiast ilosć meczy, w których zdobycz punktowa była wyższa niż 25 była o wiele większa, niż ilość meczy w których nie rzucił 25 "oczek" (Patrz [Fig. - @fig-Morethan25]). Dokładna suma tych meczy wynosi **58**.
+
+```{r}
+x <- RS %>% 
+  filter(PTS>25) %>% 
+  summarise("MoreT25"=n())
+```
+
+```{r}
+#| label: fig-Morethan25
+#| fig-cap: Ilość meczy, podczas których MJ zdobył więcej niż 25 punktów
+RS %>% 
+  group_by(WL,PTS>25) %>% 
+  summarise("MoreT25"=n()) %>% 
+  ggplot(aes(WL, MoreT25, fill=factor(`PTS > 25`))) +
+  geom_col(position = "dodge", colour = "white")+
+  labs(y="Ilość meczy",
+       x="Rezultat meczu \n\n L - Przegrana    W - Wygrana  ",
+       fill="Zdobycz punktowa większa niż 25")+
+    scale_fill_manual(
+    values = c("#CE1141", "#000000"),
+    labels=c("Nie","Tak"))+
+  geom_text(aes(label=MoreT25),
+            position = position_dodge(width = 0.9),
+            vjust = -0.3)
+```
+
+```{r}
+TypesofPTS <- RS %>% 
+  summarise("OnePTS"=sum(FT),
+            "TwoPTS"=(sum(PTS)-sum(FT)-(sum(TP)*3)),
+            "ThreePTS"=(sum(TP)*3))
+            
+TypesofPTS_df <- data.frame(
+  group=c("Punkty zdobyte z rzutuów osobistych","Punkty zdobyte z półdystansu","Punkty zdobyte zza lini 3 punktów"),
+  value=c(TypesofPTS$OnePTS,TypesofPTS$TwoPTS,TypesofPTS$ThreePTS)
+)
+```
+
+Złota Era NBA charakteryzowała się fizycznością i mniejszą ilością rzutów za 3 punkty, co również możemy zobaczyć u Jordana. Zdecydowaną **większość swoich punktów zdobył rzutami z półdystansu**, czyli za dwa punkty (Patrz [Fig. - @fig-TypeofPTS]).
+
+```{r}
+#| label: fig-TypeofPTS
+#| fig-cap: Suma punktów zdobytych z rzutów osobistych, półdystansu i zza linii 7.24
+ggplot(TypesofPTS_df, aes(x="", y=value, fill=group)) +
+  geom_bar(stat="identity", width=1.5, color="black") +
+  coord_polar("y", start=0) +
+  theme_void()+
+  labs(fill="")+
+  scale_fill_manual(values=c("#CE1141","#000000","#FFFFFF"))+
+  geom_text(aes(label = value),
+            position = position_stack(vjust = 0.5),
+            color=ifelse(TypesofPTS_df$value==90,"black","white"))
+```
+
+```{r}
+Per_Osobiste <- RS %>% 
+  summarise("Trafione"=percent(sum(FT)/sum(FTA)),
+            "Nietrafione"=percent(1-(sum(FT)/sum(FTA))))
+
+Per_Osobiste_df <- data.frame(
+  group=c("Trafione","Nietrafione"),
+  value=c(Per_Osobiste$Trafione,Per_Osobiste$Nietrafione)
+)
+```
+
+```{r}
+MeanofFT <- RS %>% 
+  summarise("Średnia rzutóW osobistych na mecz"=round(sum(FTA)/82,digits = 2)) 
+  
+```
+
+Z racji, że MJ często był faulowany, w celu przeszkodzenia mu w zdobywaniu punktów i zniechęceniu do dalszej gry, znajdował się on często na linii rzutów osobistych - średnio **9** razy co mecz. Rzuty te wykonywał jednak ze świetną skutecznością - **78%** (Patrz [Fig. - @fig-PercentFT]), co pozwoliło mu zdobyć aż **565 punktów** (Patrz [Fig. - @fig-TypeofPTS]) w sezonie 97-98.
+
+```{r}
+#| label: fig-PercentFT
+#| fig-cap: Skuteczność rzutów osobistych
+ggplot(Per_Osobiste_df, aes(x="", y=value, fill=group)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  theme_void()+
+  labs(fill="")+
+  scale_fill_manual(values=c("#CE1141","#000000"))+
+  geom_text(aes(label = value),
+            position = position_stack(vjust = 0.5),
+            color="white")
+```
+
+Wiemy, że średnia ilość minut na boisku MJ'a wynosiła **38.88** (Patrz [Tbl. - @tbl-MinSummary]), natomiast średnia ilość punktów wynosi **28.74** (Patrz. [Tbl. - @tbl-PtsSummary]). Z wykresu przedstawionego poniżej (Patrz [Fig. - @fig-MinToPoints]) możemy zobaczyć jak ilość minut na boisku wpływa na zdobycze punktowe.
+
+```{r}
+#| label: fig-MinToPoints
+#| fig-cap: Ilość minut a ilośc zdobytych punktów
+
+RS %>% 
+   ggplot(aes(x=MIN,y=PTS,group=1))+
+    geom_point(shape=21, size=4,aes(fill=after_stat(y>28.74)))+
+  geom_smooth(se=FALSE, method="lm", color=alpha("black",0.5), size=1.5)+
+  labs(y="Minuty na boisku",
+       x="Ilość zdobytych punktów",
+       fill="Ilość punktów zdobytych ponad średnią (28.74)")+
+    scale_fill_manual(
+    values = c("#CE1141", "#FFFFFF"),
+    labels = c("Nie","Tak")
+  )+
+  theme(legend.position = "top")
+
+```
+
+*„Nie trafiłem ponad 9000 rzutów w mojej karierze. Przegrałem prawie 300 gier. 26 razy nie trafiłem decydujących piłek w meczu. Ponosiłem porażki raz po raz przez całe moje życie. I właśnie dlatego osiągnąłem sukces." - **Michael Jordan** - @cytatMJ*
+
+```{r}
+FGAshow <- sum(RS$FGA)
+FGshow <- sum(RS$FG)
+```
+
+MJ w sezonie 97-98 oddał łącznie **1893** rzutów, z czego aż **881** trafił. Wykres (Patrz [Fig. - @fig-FGtoFGA]) znajdujący się poniżej ukazuje różnicę między rzutami celnymi a niecelnymi zwiększającą się z meczu na mecz.
+
+```{r,,fig.width=16,fig.height=7}
+#| label: fig-FGtoFGA
+#| fig-cap: Ilość rzutów oddanych a rzutów trafionych
+RS %>% 
+  mutate("FGTotal"=cumsum(FG),
+         "FGATotal"=cumsum(FGA)) %>% 
+    ggplot()+ 
+    geom_line(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+  geom_point(aes(x=Date,y=FGTotal,group=1,color='Rzuty wykonane'))+
+    geom_line(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+  geom_point(aes(x=Date,y=FGATotal,group=1,color='Rzuty trafione'))+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size = 13))+
+  labs(y="",
+       x="Data meczu",
+       color="")+
+  theme(legend.position = "top")+
+  scale_color_manual(values = c("Rzuty wykonane" = "red", "Rzuty trafione" = "black"))+
+  theme(legend.position = "top")+
+  theme(legend.title = element_text(size = 20),
+        legend.text = element_text(size = 20),
+        axis.title.x = element_text(size = 20),
+        axis.title.y = element_text(size = 1),
+        axis.text.y = element_text(size = 20))
+```
+
+Przyjrzyjmy się jak MJ wypadł na tle poszczególnych drużyn. Chciacago Bulls w sezonie 97-98 zmierzyło się z 29 drużynami - najmniejsza ilość meczy przeciwko drużynie wynosiła **2**, a największa **4**. (Patrz. [Tbl. - @tbl-MeczeSummary]).
+
+```{r}
+##Jak wypadł przeciwko każdej drużynie
+Teams<- RS %>% 
+  group_by(Team) %>% 
+  summarise(Max=max(PTS),
+            "Średnia"=mean(PTS),
+            "Ilość meczy"=n())
+```
+
+```{r}
+#| label: tbl-MeczeSummary
+#| tbl-cap: Ilość rozegranych meczy 
+Teams %>% 
+  group_by(`Ilość meczy`) %>% 
+  summarise("Ilość drużyn"= n()) %>% 
+     kbl(align = "c") %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = F, position = "center") %>% 
+  column_spec(1, 
+              color = c("white","black","white"),
+              background = c("red","white","black")) %>% 
+    column_spec(2, bold = T)
+```
+
+```{r}
+Teamdf<- data.frame(
+  x = Teams$Team,
+  y = Teams$Średnia,
+  g = Teams$`Ilość meczy`
+)
+```
+
+```{r}
+##Ułątwienia dla zrobienia tabeli
+Teamtable<- data.frame(
+  "Dryżyna" = Teams$Team,
+  "Średnia punktów" = Teams$Średnia,
+  "Ilość meczy" = Teams$`Ilość meczy`
+)
+```
+
+Poniżej (Patrz [Tbl. - @tbl-MeanMaxTeams]) możemy zobaczyć największe średnie rzuconych punktów, zgrupowane ilością rozegranych meczy. Natomiast wykres (Patrz [Fig. - @fig-MeanTeams]) ukazuje średnią uzyskaną z każdą drużyną.
+
+```{r}
+#| label: tbl-MeanMaxTeams
+#| tbl-cap: Największa średnia ilość punktów przeciw poszczególnym drużynom
+
+Teamdf %>% 
+  group_by(g) %>% 
+  arrange(-y) %>% 
+  filter(row_number()==1) %>%
+  rename(" Drużyna "="x",
+               " Średnia punktów "="y",
+               " Ilość meczy "="g") %>%
+  kbl(align="c",escape = F) %>% 
+  kable_styling(bootstrap_options=c( "hover","condensed","bordered"), full_width = F, position = "center") %>% 
+  column_spec(1, image =spec_image(c("HOU.png","NYK.png","MIA.png"),70,70)) %>% 
+    column_spec(3, 
+              color = c("white","white","black"),
+              background = c("red","black","white"))
+```
+
+```{r,fig.width=9}
+#| label: fig-MeanTeams
+#| fig-cap: Średnia ilość punktów zdobytych przeciw poszczególnym drużynom
+
+Teamdf %>% 
+  ggplot(aes(reorder(x,-y), y, fill=factor(g))) +
+  geom_col(position = "dodge", colour = "black",width = 0.8)+
+  labs(y="Średnia ilość punktów",
+       x="Zespół",
+       fill="Ilość meczy rozegranych z poszczególną drużyną")+
+  scale_fill_manual(values=c("#CE1141","#FFFFFF","#000000"))+
+  theme(legend.position = "top")
+```
+
+Z tabeli numer 4 (Patrz [Tbl. - @tbl-PtsSummary]) wiemy już, jakie była maksymalna i minimalna ilość rzuconych punktów. Wykres (Patrz [Fig. - @fig-MaxTeams]) pokazuje największą ilość zdobytych "oczek" przeciw poszczególnym drużynom - **najwięcej przeciw Los Angeles Clippers, a najmniej przeciw Vancouver Grizzlies** (obecne Memphis Grizzlies).
+
+```{r,fig.height=8}
+#| label: fig-MaxTeams
+#| fig-cap: Maksymalna ilość punktów zdobytych przeciw poszczególnym drużynom
+
+Teams %>% 
+  arrange(-Max)%>%
+  ggplot(aes(x=reorder(Team, -Max),y=Max, fill=Team,color=Team))+
+  geom_col(size=1,width = 0.65)+
+  scale_fill_manual(values = c("#C8102E","#007A33","#1d1160","#860038","#00538C","#0E2240","#C8102E","#1D428A","#CE1141","#002D62","#c8102E","#552583","#98002E","#00471B","#0C2340","#002A60","#006BB6","#0077c0","#006bb6","#FF6900","#E03A3E","#5a2d81","#c4ced4","#00653a","#753BBD","#002B5C","#00B2A9","#002B5C"))+
+  scale_color_manual(values = c("#FDB927","#BA9653","#00788C","#FDBB30","#002B5e","#FEC524","#1d42ba","#ffc72c","#000000","#FDBB30","#1d428a","#FDB927","#F9A01B","#EEE1C6","#78BE20","#777D84","#F58426","#C4ced4","#ed174c","#5F259F","#000000","#63727A","#000000","#ffc200","#BA0C2F","#00471B","#BC7844","#e31837"))+
+  labs(y="Maksymalna ilość punktów",
+       x="Zespół",
+       fill="Zespół",
+       color="Zespół")+
+  coord_flip()
+```
+
+```{r}
+MeanSkut <- RS %>% 
+  mutate("Skut"=round(FG/FGA,digits = 2)) %>% 
+  filter(`Skut`>=0.6) %>% 
+  summarise(Mean=mean(FGA))
+```
+
+W sezonie 97-98 MJ rozegrał, aż **8 meczy** podczas których trafiał **na skuteczności ponad** **60%** (Patrz [Tbl. - @tbl-effectivenessover60]). Każdy z tych meczów został wygrany przez ekipę Chicago Bulls, natomiast MJ średnio w każdym z tych spotkań oddał **22** rzuty.
+
+```{r}
+#| label: tbl-effectivenessover60
+#| tbl-cap: Mecze, w których "MJ" rzucał ze skutecznością większa niż 60%
+RS %>% 
+  mutate("Skut"=round(FG/FGA,digits = 2)) %>% 
+  filter(Skut>=0.6) %>%
+  arrange(-Skut) %>% 
+  mutate("Skuteczność"=percent(Skut)) %>% 
+  select(1:18,20) %>% 
+  mutate(FGA = cell_spec(FGA, color = ifelse(FGA>=22, "black", "red"),
+                           bold = T)) %>% 
+  kbl(align="c",escape = F) %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = T, position = "center") %>% 
+  column_spec(3, 
+              color = "#01fd21",bold=T) %>% 
+  column_spec(2, image =spec_image(c("ATL.png","MIL.png","ATL.png","MIN.png","DEN.png","VAN.png","CHH.png","ORL.png"),70,70))
+  
+  
+```
+
+## Asysty, Przechwyty, Bloki i zbiórki
+
+MJ był świetny w ataku, jednak nie odstawał również w obronie - był **"two-way player'em"**. Tabela (Patrz [Tbl. - @tbl-Total]) przedstawia podsumowanie jego asyst, przechwytów, bloków oraz zbiórek. Natomiast wykres (Patrz [Fig. - @fig-StealsandBlocks]) ukazuje zwiększającą się sumę przechwytów i bloków z meczu na mecz.
+
+```{r}
+#| label: tbl-Total
+#| tbl-cap: Podsumowanie statystyk "dodatnich"
+
+Total_df<- data.frame(
+  Typ=c("Asysty","Przechwyty","Bloki","Zbiórki"),
+  Maksimum=c(max(RS$AST),max(RS$STL),max(RS$BLK),max(RS$REB)),
+  Mean=c(round(mean(RS$AST),digits = 2),round(mean(RS$STL),digits = 2),round(mean(RS$BLK),digits = 2),round(mean(RS$REB),digits = 2)),
+  Suma=c(sum(AST),sum(STL),sum(BLK),sum(REB))
+) %>% rename(" "="Typ",
+             "Średnia"="Mean")
+
+Total_df %>% 
+  mutate_if(is.numeric, function(x){
+    cell_spec(x, "html", color = spec_color(x), font_size = spec_font_size(x), bold = T)
+  }) %>% 
+  kable("html", escape = F, align = "c") %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = F, position = "center") %>% 
+  column_spec(1,bold = T)
+```
+
+```{r,fig.width=16,fig.height=7}
+#| label: fig-StealsandBlocks
+#| fig-cap: Suma bloków i przchwytów na przekroju całego sezonu
+RS %>% 
+  mutate("STLTotal"=cumsum(STL),
+         "BLKTotal"=cumsum(BLK),
+         "ASTTotal"=cumsum(AST)) %>% 
+    ggplot()+ 
+    geom_line(aes(x=Date,y=STLTotal,group=1,color='Przechwyty'))+
+  geom_point(aes(x=Date,y=STLTotal,group=1,color='Przechwyty'))+
+    geom_line(aes(x=Date,y=BLKTotal,group=1,color='Bloki'))+
+  geom_point(aes(x=Date,y=BLKTotal,group=1,color='Bloki'))+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size = 13))+
+  labs(y="",
+       x="Data meczu",
+       color="")+
+  theme(legend.position = "top")+
+  scale_color_manual(values = c("Przechwyty" = "red", "Bloki" = "black"))+
+  theme(legend.position = "top")+
+  theme(legend.title = element_text(size = 20),
+        legend.text = element_text(size = 20),
+        axis.title.x = element_text(size = 20),
+        axis.title.y = element_text(size = 1),
+        axis.text.y = element_text(size = 20))
+```
+
+```{r}
+LessAST<- RS %>%
+  filter(AST<TO) %>% 
+  count()
+
+SameAST<- RS %>%
+  filter(AST==TO) %>% 
+  count()
+
+MoreAST<- RS %>%
+  filter(AST>TO) %>% 
+  count()
+
+AST_TO_df <- data.frame(
+  group=c("Ilość meczy z mniejszą ilością asyst niż strat","Ilość meczy z taką samą ilością asyst niż strat","Ilość meczy z większą ilością asyst niż strat"),
+  value=c(LessAST$n,SameAST$n,MoreAST$n)
+)
+```
+
+```{r}
+MeanAST<- RS %>% 
+  summarise("Srednia asyst"=round(mean(AST), digits=2))
+```
+
+Rzucający obrońca - pozycja, na której grał MJ charakteryzuje się jak sama nazwa wskazuje zdobywaniem punktów, jednak zdażało mu się również asystować. Jego **średnia asyst** w sezonie 97-98 wynosi **3.45** na mecz. Wykres (Patrz [Fig. - @fig-ASTtoTO]) ukazuje ilość meczy z porównaniem ilości asyst i strat, możemy zauważyć, że jedynie w **16 z 82 meczy ilość strat była większa od asyst**.
+
+```{r}
+#| label: fig-ASTtoTO
+#| fig-cap: Suma meczy z porównaniem ilości asyst i strat
+AST_TO_df %>% 
+ggplot( aes(reorder(x=group,-value), y=value, fill=group)) +
+  geom_col(color="black") +
+  theme_void()+
+  labs(fill="")+
+  scale_fill_manual(values=c("#CE1141","#FFFFFF","#000000"))+
+  geom_text(aes(label=value),
+            position = position_dodge(width = 0.9),
+            vjust = -0.4)
+```
+
+Podczas sezonu regularnego "Mike" w **5** meczach miał dwucyfrową liczbę zbiórek, tym samym uzyskując **double-double** (Patrz [Tbl. - @tbl-Doubledouble]) . Są to jedyne double-double jakie zdobył w sezonie 97-98.
+
+@Double-double *-* *uzyskanie wyników dwucyfrowych w dwóch z pięciu możliwych pozytywnych statystyk (punkty, asysty, zbiórki, przechwyty, bloki)*
+
+```{r}
+#| label: tbl-Doubledouble
+#| tbl-cap: Mecze podczas, których MJ miał "double-double"
+RS %>% 
+  filter(REB>10) %>% 
+  kbl(align="c",escape = F) %>%
+  column_spec(3, 
+              color = "#01fd21",bold=T) %>% 
+  column_spec(2, image =spec_image(c("SAS.png","ORL.png","LAC.png","MIA.png","DET.png"),70,70)) %>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = T, position = "center") %>% 
+  column_spec(5, 
+              color = "white",
+              background = "black") %>% 
+  column_spec(12, 
+              color = "white",
+              background = "red")
+```
+
+# Podsumowanie
+
+```{r}
+PMmorethan0 <- RS %>% 
+  filter(PM>0) %>% 
+  summarise(ilosc=n())
+```
+
+MJ jako kapitan zespołu, a także super gwiazda ligi NBA w każdym spotkaniu dawał z siebie 100% i walczył o zwycięstwo. W każdym meczu miał przed sobą wielkie zobowiązania wobec kibiców oraz kolegów z zespołu, a w związku z tym wielką presję. W **62 z 82 meczy wskaźnik +/- Jordana był dodatni, natomiast aż w 10 spotkaniach przekraczał on liczbę 20.**
+
+```{r}
+#| label: tbl-PM
+#| tbl-cap: Mecze podczas, których wskaźnik "+/-" był większy od 20
+RS %>% 
+  filter(PM>0) %>% 
+  arrange(-PM) %>% 
+  head(n=10)%>%
+  select(1:5,18,6:17) %>% 
+  mutate(PM=color_bar("red")(PM),
+         PTS=cell_spec(PTS,
+                       font_size = spec_font_size(PTS), bold = T)) %>% 
+  kbl(align="c",escape = F)%>% 
+  kable_styling(bootstrap_options=c("striped", "hover","condensed","bordered"), full_width = T, position = "center") %>% 
+  column_spec(3, 
+              color = "#01fd21",bold=T)%>% 
+  column_spec(2, image =spec_image(c("TOR.png","WAS.png","TOR.png","VAN.png","DEN.png","DEN.png","BOS.png","NJN.png","ORL.png","LAL.png"),70,70)) %>% 
+  column_spec(6, 
+              color = "white")%>% 
+  scroll_box(height = "550px")
+ 
+```
+
+**18 maja 1998** roku "Mike" zwieńczył swój ostatni sezon zasadniczy w trykocie Chicago Bulls otrzymując statuetkę **MVP** (Most Valuable Player). Było to już 5 trofeum najbardziej wartościowego gracza w jego karierze, co stawiało go na równi z Bill'em Russell'em oraz tylko jedno trofeum za Kareem Abdul-Jabbar'em.
+
+[![Michael Jordan odbiera nagrodę MVP w sezonie 97-98](pictures/MVP.jpeg){fig-align="center"}](https://pl.wikipedia.org/wiki/NBA_Most_Valuable_Player_Award)
